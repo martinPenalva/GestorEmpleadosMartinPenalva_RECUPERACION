@@ -5,7 +5,7 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class MYSQL {
-    private static final String URL = "jdbc:mysql://localhost:3308/trabajadores";
+    private static final String URL = "jdbc:mysql://localhost:3309/trabajadores";
     private static final String USUARIO = "root";
     private static final String CONTRASENA = "root";
 
