@@ -17,48 +17,48 @@ import java.util.Optional;
 
 public class Controler {
     @FXML
-    private Button buttonModificar;
-    private final ArrayList<Trabajador> ListaTrabajadores = new ArrayList<>();
+    private Button modificarButton;
+    private final ArrayList<Trabajador> listaTrabajadores = new ArrayList<>();
     @FXML
-    private Label welcomeText;
+    private Label welcomeLabel;
     @FXML
-    private TextField txtFieldNombre;
+    private TextField nombreTextField;
     @FXML
-    private TextField FieldtextSalario;
+    private TextField salarioTextField;
     @FXML
-    private Button añadirEmpleado;
+    private Button añadirButton;
     @FXML
-    private Label ConsultarID;
+    private Label idLabel;
     @FXML
-    private Label ConsultarNombre;
+    private Label nombreLabel;
     @FXML
-    private Label ConsultarPuesto;
+    private Label puestoLabel;
     @FXML
-    private Label ConsultarSueldo;
+    private Label sueldoLabel;
     @FXML
-    private Label ConsultarFecha;
+    private Label fechaLabel;
     @FXML
-    private Button ButtonRefrescar;
+    private Button refrescarButton;
     @FXML
-    private Button buttonEliminar;
+    private Button eliminarButton;
     @FXML
-    private ListView<String> listViewTrabajadores;
+    private ListView<String> trabajadoresListView;
     @FXML
-    private ComboBox Puesto;
+    private ComboBox<String> puestoComboBox;
 
     private LocalDate fechaAlta = LocalDate.now();
 
     @FXML
     public Trabajador crearTrabajador() {
-        String nombre = txtFieldNombre.getText();
+        String nombre = nombreTextField.getText();
         int salario;
         try {
-            salario = Integer.parseInt(FieldtextSalario.getText());
+            salario = Integer.parseInt(salarioTextField.getText());
         } catch (NumberFormatException e) {
             mostrarAlerta("El salario debe ser un número válido");
             return null;
         }
-        String puesto = (String) Puesto.getValue();
+        String puesto = (String) puestoComboBox.getValue();
         System.out.println(">>> Datos del nuevo trabajador:");
         System.out.println(" - Nombre ingresado: " + nombre);
         System.out.println(" - Cargo seleccionado: " + puesto);
@@ -68,7 +68,7 @@ public class Controler {
     }
 
     public void anyadirEmpleados(Trabajador t) {
-        ListaTrabajadores.add(t);
+        listaTrabajadores.add(t);
     }
 
     private void mostrarAlerta(String mensaje) {
@@ -79,16 +79,16 @@ public class Controler {
         ButtonType botonAceptar = new ButtonType("Entendido");
         alerta.getButtonTypes().setAll(botonAceptar);
         alerta.setOnCloseRequest(event -> {
-            txtFieldNombre.clear();
-            FieldtextSalario.clear();
-            Puesto.setValue(null);
+            nombreTextField.clear();
+            salarioTextField.clear();
+            puestoComboBox.setValue(null);
         });
         alerta.showAndWait();
     }
 
     @FXML
     public void añadirEmpleado() {
-        if (txtFieldNombre.getText().isEmpty() || FieldtextSalario.getText().isEmpty() || Puesto.getValue() == null) {
+        if (nombreTextField.getText().isEmpty() || salarioTextField.getText().isEmpty() || puestoComboBox.getValue() == null) {
             System.out.println("⚠️ Por favor, completa todos los campos antes de continuar.");
             return;
         }
@@ -108,7 +108,7 @@ public class Controler {
                 while ((lineaTrabajador = reader.readLine()) != null) {
                     Trabajador trabajador = parsearLinea(lineaTrabajador);
                     if (trabajador != null) {
-                        ListaTrabajadores.add(trabajador);
+                        listaTrabajadores.add(trabajador);
                         MYSQL.insertar(trabajador);
                         System.out.println("✔ Trabajador importado: " + trabajador.getNombre());
                     } else {
@@ -145,14 +145,14 @@ public class Controler {
 
     @FXML
     public void clickrefrescar() {
-        listViewTrabajadores.getItems().clear();
+        trabajadoresListView.getItems().clear();
 
-        if (ListaTrabajadores.isEmpty()) {
+        if (listaTrabajadores.isEmpty()) {
             LeerTrabajadores();
         }
 
-        for (Trabajador t : ListaTrabajadores) {
-            listViewTrabajadores.getItems().add(t.getNombre());
+        for (Trabajador t : listaTrabajadores) {
+            trabajadoresListView.getItems().add(t.getNombre());
             System.out.println("📋 Añadido al listado: " + t.getNombre());
         }
     }
@@ -161,32 +161,32 @@ public class Controler {
     public void initialize() {
         clickrefrescar();
         eliminarTrabajador();
-        listViewTrabajadores.setOnMouseClicked(event -> {
+        trabajadoresListView.setOnMouseClicked(event -> {
             eliminarTrabajador();
-            int indiceSeleccionado = listViewTrabajadores.getSelectionModel().getSelectedIndex();
+            int indiceSeleccionado = trabajadoresListView.getSelectionModel().getSelectedIndex();
 
             if (indiceSeleccionado >= 0) {
-                Trabajador trabajadorSeleccionado = ListaTrabajadores.get(indiceSeleccionado);
-                ConsultarID.setText(String.valueOf(trabajadorSeleccionado.getId()));
-                ConsultarNombre.setText(trabajadorSeleccionado.getNombre());
-                ConsultarPuesto.setText(trabajadorSeleccionado.getPuesto());
-                ConsultarSueldo.setText(String.valueOf(trabajadorSeleccionado.getSalario()));
+                Trabajador trabajadorSeleccionado = listaTrabajadores.get(indiceSeleccionado);
+                idLabel.setText(String.valueOf(trabajadorSeleccionado.getId()));
+                nombreLabel.setText(trabajadorSeleccionado.getNombre());
+                puestoLabel.setText(trabajadorSeleccionado.getPuesto());
+                sueldoLabel.setText(String.valueOf(trabajadorSeleccionado.getSalario()));
                 LocalDate fechaAlta = trabajadorSeleccionado.getFechaAlta();
                 if (fechaAlta != null) {
-                    ConsultarFecha.setText(fechaAlta.toString());
+                    fechaLabel.setText(fechaAlta.toString());
                 } else {
-                    ConsultarFecha.setText("No disponible");
+                    fechaLabel.setText("No disponible");
                 }
             }
         });
     }
 
     public void eliminarTrabajador() {
-        buttonEliminar.setOnAction(event -> {
-            int indiceSeleccionado = listViewTrabajadores.getSelectionModel().getSelectedIndex();
+        eliminarButton.setOnAction(event -> {
+            int indiceSeleccionado = trabajadoresListView.getSelectionModel().getSelectedIndex();
 
             if (indiceSeleccionado >= 0) {
-                Trabajador trabajadorSeleccionado = ListaTrabajadores.get(indiceSeleccionado);
+                Trabajador trabajadorSeleccionado = listaTrabajadores.get(indiceSeleccionado);
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmar eliminación");
@@ -207,19 +207,19 @@ public class Controler {
     }
 
     private void ConfirmarDelete() {
-        int indiceSeleccionado = listViewTrabajadores.getSelectionModel().getSelectedIndex();
+        int indiceSeleccionado = trabajadoresListView.getSelectionModel().getSelectedIndex();
 
         if (indiceSeleccionado >= 0) {
-            Trabajador trabajadorSeleccionado = ListaTrabajadores.get(indiceSeleccionado);
-            ListaTrabajadores.remove(trabajadorSeleccionado);
+            Trabajador trabajadorSeleccionado = listaTrabajadores.get(indiceSeleccionado);
+            listaTrabajadores.remove(trabajadorSeleccionado);
 
-            ConsultarID.setText("");
-            ConsultarNombre.setText("");
-            ConsultarPuesto.setText("");
-            ConsultarSueldo.setText("");
-            ConsultarFecha.setText("");
+            idLabel.setText("");
+            nombreLabel.setText("");
+            puestoLabel.setText("");
+            sueldoLabel.setText("");
+            fechaLabel.setText("");
 
-            listViewTrabajadores.getItems().remove(indiceSeleccionado);
+            trabajadoresListView.getItems().remove(indiceSeleccionado);
 
             System.out.println("🗑 Trabajador eliminado: " + trabajadorSeleccionado.getNombre());
         } else {
@@ -229,10 +229,10 @@ public class Controler {
 
     @FXML
     private void modificarButton() {
-        String nombreSeleccionado = listViewTrabajadores.getSelectionModel().getSelectedItem();
+        String nombreSeleccionado = trabajadoresListView.getSelectionModel().getSelectedItem();
         Trabajador trabajadorSeleccionado = null;
 
-        for (Trabajador trabajador : ListaTrabajadores) {
+        for (Trabajador trabajador : listaTrabajadores) {
             if (trabajador.getNombre().equals(nombreSeleccionado)) {
                 trabajadorSeleccionado = trabajador;
                 break;
@@ -245,12 +245,12 @@ public class Controler {
                 Parent root = loader.load();
 
                 Modificar modificarController = loader.getController();
-                
+
                 Stage stage = new Stage();
                 stage.setTitle("Modificar Trabajador");
                 stage.setScene(new Scene(root, 1000, 800));
                 stage.setResizable(false);
-                
+
                 modificarController.init(trabajadorSeleccionado, stage);
                 stage.show();
             } catch (IOException e) {

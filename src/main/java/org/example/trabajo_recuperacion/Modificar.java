@@ -15,15 +15,15 @@ import java.util.Optional;
 public class Modificar {
 
     @FXML
-    private TextField modificarNombre;
+    private TextField nombreTextField;
     @FXML
-    private TextField modificarPuesto;
+    private TextField puestoTextField;
     @FXML
-    private TextField modificarSalario;
+    private TextField salarioTextField;
     @FXML
-    private Button botonCancelar;
+    private Button cancelarButton;
     @FXML
-    private Button botonEditar;
+    private Button editarButton;
 
     private Trabajador trabajadorSeleccionado;
     private Stage stage;
@@ -34,9 +34,9 @@ public class Modificar {
         this.stage = stage;
 
         // Se muestran los datos actuales del trabajador
-        modificarNombre.setText(trabajador.getNombre());
-        modificarPuesto.setText(trabajador.getPuesto());
-        modificarSalario.setText(String.valueOf(trabajador.getSalario()));
+        nombreTextField.setText(trabajador.getNombre());
+        puestoTextField.setText(trabajador.getPuesto());
+        salarioTextField.setText(String.valueOf(trabajador.getSalario()));
     }
 
     @FXML
@@ -49,18 +49,18 @@ public class Modificar {
         if (trabajadorSeleccionado != null) {
             try {
                 // Validar que los campos no estén vacíos
-                if (modificarNombre.getText().isEmpty() || modificarPuesto.getText().isEmpty() || modificarSalario.getText().isEmpty()) {
+                if (nombreTextField.getText().isEmpty() || puestoTextField.getText().isEmpty() || salarioTextField.getText().isEmpty()) {
                     mostrarAlerta("Error", "Todos los campos son obligatorios", AlertType.ERROR);
                     return;
                 }
 
                 // Obtener los nuevos valores
-                String nuevoNombre = modificarNombre.getText().trim();
-                String nuevoPuesto = modificarPuesto.getText().trim();
+                String nuevoNombre = nombreTextField.getText().trim();
+                String nuevoPuesto = puestoTextField.getText().trim();
                 int nuevoSalario;
-                
+
                 try {
-                    nuevoSalario = Integer.parseInt(modificarSalario.getText().trim());
+                    nuevoSalario = Integer.parseInt(salarioTextField.getText().trim());
                     if (nuevoSalario <= 0) {
                         mostrarAlerta("Error", "El salario debe ser un número positivo", AlertType.ERROR);
                         return;
@@ -77,10 +77,10 @@ public class Modificar {
 
                 // Actualizar en la base de datos
                 MYSQL.actualizar(trabajadorSeleccionado);
-                
+
                 // Mostrar mensaje de éxito
                 mostrarAlerta("Éxito", "Trabajador actualizado correctamente", AlertType.INFORMATION);
-                
+
                 // Cerrar la ventana
                 stage.close();
             } catch (Exception e) {
@@ -94,7 +94,7 @@ public class Modificar {
     @FXML
     private void modificarNombre() {
         String nuevoNombre = obtenerNuevoNombre();
-        modificarNombre.setText(nuevoNombre);
+        nombreTextField.setText(nuevoNombre);
     }
 
     private String obtenerNuevoNombre() {
@@ -115,7 +115,7 @@ public class Modificar {
         dialog.setHeaderText("Introduce el nuevo salario:");
         dialog.setContentText("Salario:");
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(nuevoSalario -> modificarSalario.setText(nuevoSalario));
+        result.ifPresent(nuevoSalario -> salarioTextField.setText(nuevoSalario));
     }
 
     @FXML
@@ -124,7 +124,7 @@ public class Modificar {
         dialog.setTitle("Modificar puesto");
         dialog.setHeaderText("Selecciona el nuevo puesto:");
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(nuevoPuesto -> modificarPuesto.setText(nuevoPuesto));
+        result.ifPresent(nuevoPuesto -> puestoTextField.setText(nuevoPuesto));
     }
 
     private void mostrarAlerta(String titulo, String mensaje, AlertType tipo) {

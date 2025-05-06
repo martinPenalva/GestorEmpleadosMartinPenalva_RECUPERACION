@@ -30,7 +30,7 @@
                                                 <Label text="Nombre" style="-fx-font-weight: bold; -fx-font-size: 14;">
                                                     <font><Font name="Inter Regular" size="14.0" /></font>
                                                 </Label>
-                                                <TextField fx:id="txtFieldNombre" prefWidth="200" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                                <TextField fx:id="nombreTextField" prefWidth="200" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                             </children>
                                         </HBox>
 
@@ -39,7 +39,7 @@
                                                 <Label text="Puesto" style="-fx-font-weight: bold; -fx-font-size: 14;">
                                                     <font><Font name="Inter Regular" size="14.0" /></font>
                                                 </Label>
-                                                <ComboBox fx:id="Puesto" prefWidth="200" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;">
+                                                <ComboBox fx:id="puestoComboBox" prefWidth="200" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;">
                                                     <items>
                                                         <FXCollections fx:factory="observableArrayList">
                                                             <String fx:value="Scada Manager" />
@@ -59,11 +59,11 @@
                                                 <Label text="Salario" style="-fx-font-weight: bold; -fx-font-size: 14;">
                                                     <font><Font name="Inter Regular" size="14.0" /></font>
                                                 </Label>
-                                                <TextField fx:id="FieldtextSalario" prefWidth="200" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                                <TextField fx:id="salarioTextField" prefWidth="200" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                             </children>
                                         </HBox>
 
-                                        <Button fx:id="añadirEmpleado" onAction="#añadirEmpleado" prefWidth="150" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8;" text="Insertar">
+                                        <Button fx:id="añadirButton" onAction="#añadirEmpleado" prefWidth="150" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8;" text="Insertar">
                                             <font><Font name="Inter Regular" size="14.0" /></font>
                                         </Button>
                                     </children>
@@ -84,35 +84,35 @@
                     <content>
                         <AnchorPane style="-fx-background-color: white; -fx-padding: 30;">
                             <children>
-                                <ListView fx:id="listViewTrabajadores" layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                <ListView fx:id="trabajadoresListView" layoutX="50.0" layoutY="50.0" prefHeight="500.0" prefWidth="300.0" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
 
-                                <Button fx:id="ButtonRefrescar" layoutX="370.0" layoutY="50.0" onAction="#clickrefrescar" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 16;" text="↺" />
+                                <Button fx:id="refrescarButton" layoutX="370.0" layoutY="50.0" onAction="#clickrefrescar" prefWidth="50.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 16;" text="↺" />
 
                                 <VBox layoutX="450.0" layoutY="50.0" spacing="20" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 5; -fx-border-color: #e0e0e0; -fx-border-width: 1;">
                                     <children>
                                         <HBox spacing="10">
                                             <Label text="ID:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
-                                            <Label fx:id="ConsultarID" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                            <Label fx:id="idLabel" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                         </HBox>
                                         <HBox spacing="10">
                                             <Label text="Nombre:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
-                                            <Label fx:id="ConsultarNombre" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                            <Label fx:id="nombreLabel" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                         </HBox>
                                         <HBox spacing="10">
                                             <Label text="Puesto:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
-                                            <Label fx:id="ConsultarPuesto" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                            <Label fx:id="puestoLabel" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                         </HBox>
                                         <HBox spacing="10">
                                             <Label text="Salario:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
-                                            <Label fx:id="ConsultarSueldo" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                            <Label fx:id="sueldoLabel" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                         </HBox>
                                         <HBox spacing="10">
                                             <Label text="Fecha de Alta:" style="-fx-font-weight: bold; -fx-font-size: 14;" />
-                                            <Label fx:id="ConsultarFecha" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
+                                            <Label fx:id="fechaLabel" prefWidth="150" style="-fx-background-color: #f8f9fa; -fx-padding: 8; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14;" />
                                         </HBox>
                                         <HBox alignment="CENTER_LEFT" spacing="15">
-                                            <Button fx:id="buttonModificar" onAction="#modificarButton" text="Editar" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8;" />
-                                            <Button fx:id="buttonEliminar" onAction="#eliminarTrabajador" text="Eliminar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8;" />
+                                            <Button fx:id="modificarButton" onAction="#modificarButton" text="Editar" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8;" />
+                                            <Button fx:id="eliminarButton" onAction="#eliminarTrabajador" text="Eliminar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8;" />
                                         </HBox>
                                     </children>
                                 </VBox>

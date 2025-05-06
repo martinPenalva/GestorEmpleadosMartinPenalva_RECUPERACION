@@ -1,5 +1,5 @@
-  drop database trabajadores;
-  create database trabajadores;
+ drop database trabajadores;
+ create database trabajadores;
  use trabajadores;
 SET SQL_SAFE_UPDATES = 0;
 CREATE TABLE trabajador

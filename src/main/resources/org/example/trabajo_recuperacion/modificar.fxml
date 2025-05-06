@@ -13,7 +13,7 @@
     <children>
         <VBox alignment="CENTER" spacing="20.0" layoutX="50.0" layoutY="50.0" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 5; -fx-border-color: #e0e0e0; -fx-border-width: 1;">
             <Label text="Modificar Empleado" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
-            
+
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@../../../images/img.png"/>
@@ -32,19 +32,19 @@
                 </rowConstraints>
                 <children>
                     <Label text="Nuevo Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                    <TextField fx:id="modificarNombre" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14; -fx-pref-height: 30;"/>
+                    <TextField fx:id="nombreTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14; -fx-pref-height: 30;"/>
 
                     <Label text="Nuevo Puesto:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                    <TextField fx:id="modificarPuesto" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14; -fx-pref-height: 30;"/>
+                    <TextField fx:id="puestoTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14; -fx-pref-height: 30;"/>
 
                     <Label text="Nuevo Salario:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
-                    <TextField fx:id="modificarSalario" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14; -fx-pref-height: 30;"/>
+                    <TextField fx:id="salarioTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-background-radius: 3; -fx-border-radius: 3; -fx-border-color: #e0e0e0; -fx-font-size: 14; -fx-pref-height: 30;"/>
                 </children>
             </GridPane>
 
             <HBox spacing="20.0" alignment="CENTER" style="-fx-padding: 20;">
-                <Button fx:id="botonEditar" text="Guardar Cambios" onAction="#editar" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8; -fx-pref-width: 150;"/>
-                <Button fx:id="botonCancelar" text="Cancelar" onAction="#cancelar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8; -fx-pref-width: 150;"/>
+                <Button fx:id="editarButton" text="Guardar Cambios" onAction="#editar" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8; -fx-pref-width: 150;"/>
+                <Button fx:id="cancelarButton" text="Cancelar" onAction="#cancelar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 8; -fx-pref-width: 150;"/>
             </HBox>
         </VBox>
     </children>
