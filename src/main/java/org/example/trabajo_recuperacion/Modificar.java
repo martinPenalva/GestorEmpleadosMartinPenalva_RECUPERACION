@@ -108,24 +108,6 @@ public class Modificar {
         return result.orElse(""); // Devuelve el nombre ingresado o vacío si se cancela
     }
 
-    @FXML
-    private void modificarSalario() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Modificar salario");
-        dialog.setHeaderText("Introduce el nuevo salario:");
-        dialog.setContentText("Salario:");
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(nuevoSalario -> salarioTextField.setText(nuevoSalario));
-    }
-
-    @FXML
-    private void cambiarPuesto() {
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("Puesto actual", "Puesto 1", "Puesto 2", "Puesto 3");
-        dialog.setTitle("Modificar puesto");
-        dialog.setHeaderText("Selecciona el nuevo puesto:");
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(nuevoPuesto -> puestoTextField.setText(nuevoPuesto));
-    }
 
     private void mostrarAlerta(String titulo, String mensaje, AlertType tipo) {
         Alert alert = new Alert(tipo);
