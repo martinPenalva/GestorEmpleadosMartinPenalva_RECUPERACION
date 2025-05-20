@@ -18,7 +18,6 @@
     <center>
         <TabPane tabClosingPolicy="UNAVAILABLE" style="-fx-background-color: white; -fx-padding: 20;">
             <tabs>
-                <!-- TAB AÑADIR EMPLEADO -->
                 <Tab text="Añadir Empleado">
                     <content>
                         <AnchorPane style="-fx-background-color: white; -fx-padding: 30;">
@@ -79,7 +78,6 @@
                     </content>
                 </Tab>
 
-                <!-- TAB CONSULTAR -->
                 <Tab text="Consultar">
                     <content>
                         <AnchorPane style="-fx-background-color: white; -fx-padding: 30;">

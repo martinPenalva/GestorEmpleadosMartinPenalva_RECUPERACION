@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.trabajo_recuperacion.DAO.MYSQL;
+import org.example.trabajo_recuperacion.Modelo.Trabajador;
 
 import java.io.BufferedReader;
 import java.io.IOException;

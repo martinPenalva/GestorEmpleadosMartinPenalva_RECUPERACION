@@ -1,4 +1,4 @@
-package org.example.trabajo_recuperacion;
+package org.example.trabajo_recuperacion.Modelo;
 
 import java.time.LocalDate;
 

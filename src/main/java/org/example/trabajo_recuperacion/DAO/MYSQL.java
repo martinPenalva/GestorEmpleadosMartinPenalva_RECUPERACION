@@ -1,5 +1,7 @@
-package org.example.trabajo_recuperacion;
+package org.example.trabajo_recuperacion.DAO;
 
+
+import org.example.trabajo_recuperacion.Modelo.Trabajador;
 
 import java.sql.*;
 import java.time.LocalDate;

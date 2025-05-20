@@ -6,4 +6,9 @@ module org.example.trabajo_recuperacion {
 
     opens org.example.trabajo_recuperacion to javafx.fxml;
     exports org.example.trabajo_recuperacion;
+    exports org.example.trabajo_recuperacion.Modelo;
+    opens org.example.trabajo_recuperacion.Modelo to javafx.fxml;
+    exports org.example.trabajo_recuperacion.DAO;
+    opens org.example.trabajo_recuperacion.DAO to javafx.fxml;
+
 }
